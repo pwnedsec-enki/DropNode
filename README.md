@@ -16,13 +16,24 @@ This repository contains scripts to automate creating and destroying DigitalOcea
 
 ## Prerequisites
 
-- **DigitalOcean API Token** with droplet creation and deletion rights.
-- **Tailscale Auth Key** (reusable, pre-approved; generate from the [Tailscale admin console](https://login.tailscale.com/admin/settings/keys)).
+- **DigitalOcean API Token** with the following exact required permissions:
+    - **account**: read  
+    - **droplet**: create, read, delete
+
+    **Why these permissions are needed:**
+    - `account:read`: Allows the script to fetch your account details, such as your list of SSH keys (so it can attach your key to the droplet for secure access).
+    - `droplet:create`: Allows the script to create new droplets for use as exit nodes.
+    - `droplet:read`: Allows the script to list and monitor droplets, check droplet status, and find droplets tagged as exit nodes for management.
+    - `droplet:delete`: Allows the script to destroy exit node droplets when you run the cleanup script.
+
+- **Tailscale Auth Key** that is *reusable* (generate from the [Tailscale admin console](https://login.tailscale.com/admin/settings/keys); check the box for "Reusable" when creating the key).
+
 - **SSH Public Key** uploaded to DigitalOcean and its ID (optional but recommended).
+
 - **Installed Tools:**
-  - `curl`
-  - `jq`
-  - `bash`
+    - `curl`
+    - `jq`
+    - `bash`
 
 ---
 
@@ -86,19 +97,19 @@ After you have authorized the exit node in the Tailscale admin console, you can 
 
 1. **List available exit nodes:**
 
-       sudo tailscale exit-node list
+        tailscale exit-node list
 
    This will display all available exit nodes in your network.
 
 2. **Enable the exit node:**
 
-       sudo tailscale up --exit-node <exit-node-IP>
+        tailscale up --exit-node <exit-node-IP>
 
    Replace `<exit-node-hostname>` with the name shown from the list command (e.g., `tailscale-exit-172-16-0-1`).
 
 3. **To stop using the exit node, run:**
 
-       sudo tailscale up --exit-node=
+        tailscale up --exit-node=
 
 ### iOS & Android
 
@@ -130,7 +141,7 @@ Run:
 - **Droplet creation fails:**  
   Ensure your API token and environment variables are valid. Check script output for HTTP errors.
 - **Tailscale node doesn’t appear:**  
-  Confirm your Tailscale auth key is reusable and preapproved.
+  Confirm your Tailscale auth key is set to reusable.
 - **No network connectivity through exit node:**  
   Ensure IP forwarding and NAT are enabled (the script handles this automatically).
 - **Cannot select as exit node:**  
