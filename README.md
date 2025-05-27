@@ -66,12 +66,56 @@ Run:
   After the droplet is created, you must authorize the new exit-node in the [Tailscale Admin Console](https://login.tailscale.com/admin/machines) before it can be used as an exit node.  
   Approve the machine and enable exit node functionality in the admin interface.
 
-### Verify
+- **Note:**  
+  It may take a few moments for the new droplet to appear in the Tailscale admin console after creation. If you don't see it immediately, wait and refresh the page.
 
-- Once authorized, confirm the node is visible as an exit node in the [Tailscale Admin Console](https://login.tailscale.com/admin/machines).
-- You can now route your device traffic through this exit node as needed.
+---
 
-### Destroy All Exit Node Droplets
+## Enabling the Exit Node on Client Devices
+
+After you have authorized the exit node in the Tailscale admin console, you can route your device’s internet traffic through it:
+
+### Windows & macOS
+
+1. Click the Tailscale icon in your system tray (Windows) or menu bar (macOS).
+2. Click on your DigitalOcean exit node (e.g., `tailscale-exit-xxxx`).
+3. Select **Use Exit Node** (it may be under a submenu or as a checkbox).
+4. Your internet traffic will now be routed through the exit node.
+
+### Linux
+
+1. **List available exit nodes:**
+
+       sudo tailscale exit-node list
+
+   This will display all available exit nodes in your network.
+
+2. **Enable the exit node:**
+
+       sudo tailscale up --exit-node <exit-node-IP>
+
+   Replace `<exit-node-hostname>` with the name shown from the list command (e.g., `tailscale-exit-172-16-0-1`).
+
+3. **To stop using the exit node, run:**
+
+       sudo tailscale up --exit-node=
+
+### iOS & Android
+
+1. Open the Tailscale app.
+2. Tap the menu or network settings.
+3. Choose your DigitalOcean exit node and enable "Use exit node" or "Route all traffic".
+
+---
+
+## Verify
+
+- After enabling the exit node, visit [https://www.whatismyip.com/](https://www.whatismyip.com/) or similar to confirm your public IP matches your DigitalOcean droplet.
+- You can also check the node status in the [Tailscale Admin Console](https://login.tailscale.com/admin/machines).
+
+---
+
+## Destroy All Exit Node Droplets
 
 Run:
 
@@ -91,6 +135,8 @@ Run:
   Ensure IP forwarding and NAT are enabled (the script handles this automatically).
 - **Cannot select as exit node:**  
   Make sure you have authorized the new machine and enabled it as an exit node in the Tailscale admin console.
+- **Exit node not visible immediately:**  
+  New nodes may take a minute to show up in the admin console after creation.
 
 ---
 
