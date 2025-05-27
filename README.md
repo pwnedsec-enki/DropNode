@@ -1,4 +1,16 @@
-# Tailscale DigitalOcean Exit Node Automation
+
+```text
+██████╗ ██████╗  ██████╗ ██████╗ ███╗   ██╗ ██████╗ ██████╗ ███████╗
+██╔══██╗██╔══██╗██╔═══██╗██╔══██╗████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+██║  ██║██████╔╝██║   ██║██████╔╝██╔██╗ ██║██║   ██║██║  ██║█████╗  
+██║  ██║██╔══██╗██║   ██║██╔═══╝ ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+██████╔╝██║  ██║╚██████╔╝██║     ██║ ╚████║╚██████╔╝██████╔╝███████╗
+╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝
+
+
+
+
+# Tailscale/DigitalOcean Exit Node Automation
 
 This repository contains scripts to automate creating and destroying DigitalOcean droplets configured as Tailscale exit nodes. These droplets allow you to route your Tailscale network traffic through a DigitalOcean VPS, effectively creating an exit node in your Tailscale mesh.
 
