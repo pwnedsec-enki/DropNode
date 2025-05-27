@@ -60,9 +60,15 @@ Run:
 - The droplet will install Tailscale, enable IP forwarding & NAT, and join your Tailscale network advertising itself as an exit node.
 - Droplets are tagged `tailscale-exit` and named like `tailscale-exit-<timestamp>`.
 
+### Authorize the Exit Node
+
+- **Important:**  
+  After the droplet is created, you must authorize the new exit-node in the [Tailscale Admin Console](https://login.tailscale.com/admin/machines) before it can be used as an exit node.  
+  Approve the machine and enable exit node functionality in the admin interface.
+
 ### Verify
 
-- Check the [Tailscale Admin Console](https://login.tailscale.com/admin/machines) to confirm the node is connected and visible as an exit node.
+- Once authorized, confirm the node is visible as an exit node in the [Tailscale Admin Console](https://login.tailscale.com/admin/machines).
 - You can now route your device traffic through this exit node as needed.
 
 ### Destroy All Exit Node Droplets
@@ -83,6 +89,8 @@ Run:
   Confirm your Tailscale auth key is reusable and preapproved.
 - **No network connectivity through exit node:**  
   Ensure IP forwarding and NAT are enabled (the script handles this automatically).
+- **Cannot select as exit node:**  
+  Make sure you have authorized the new machine and enabled it as an exit node in the Tailscale admin console.
 
 ---
 
